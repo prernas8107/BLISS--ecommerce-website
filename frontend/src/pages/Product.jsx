@@ -13,21 +13,18 @@ const Product = () => {
 
 
 
-  const fetchProductData = async()=> {
-    products.map((item)=>{
-      if(item._id === productId){
-        setProductData(item)
-        setImage(item.image[0])
-        // console.log(item)
-        return null;
-      }
-    })
+  const fetchProductData = async () => {
+    const item = products.find((item) => item._id === productId);
+    if (item) {
+      setProductData(item);
+      setImage(item.image && item.image[0] ? item.image[0] : '');
+    }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchProductData();
-  },[productId])
-  //whenever the productId updated,we will get the prdata through fetchproductData and then store the data in state variable productData,setProductDData
+  }, [productId, products])
+  //whenever the productId or products update, fetch the product data and set in state
   return productData ? (
     <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100'>
       {/*--------- product data---------- */}
@@ -36,13 +33,13 @@ const Product = () => {
         <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
           <div className='flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full'>
         {
-          productData.image.map((item,index)=>(
-            <img onClick={()=>setImage(item)} src={item} key={index} className='w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer' alt="" srcset="" />
+          (Array.isArray(productData.image) ? productData.image : []).map((item,index)=>(
+            <img onClick={()=>setImage(item)} src={item} key={index} className='w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer' alt="" />
           ))
         }
           </div>
           <div className='w-full sm:w-[80%]'>
-            <img className='w-full h-auto ' src={image} alt="" srcset="" />
+            <img className='w-full h-auto ' src={image} alt="" />
 
           </div>
         </div>
@@ -64,7 +61,7 @@ const Product = () => {
           <p>Select Size </p>
           <div className='flex gap-2'>
           {
-            productData.sizes.map((item,index)=>(
+            (Array.isArray(productData.sizes) ? productData.sizes : []).map((item,index)=>(
               <button onClick={()=>setSize(item)} className={` border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-50': ''}`} key={index}>{item}</button>
             ))
           }

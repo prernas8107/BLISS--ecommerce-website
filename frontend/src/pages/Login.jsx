@@ -24,8 +24,9 @@ const Login = () => {
         //register api
         const response = await axios.post(backendUrl + '/api/user/register', { name, email, password })
         if (response.data.success) {
-          setToken(response.data)
-          localStorage.setItem('token', response.data.token)
+          toast.success('Account created successfully! Please login.')
+          setCurrentState('Login')
+          setPassword('')
         } else {
           toast.error(response.data.message)
         }
@@ -44,7 +45,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error)
-      toast.error(error.message)
+      toast.error(error.response?.data?.message || error.message)
     }
   }
 

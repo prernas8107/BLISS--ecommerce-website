@@ -35,7 +35,7 @@ const statusHandler = async (event,orderId)=>{
     }
   } catch (error) {
     console.log(error)
-    toast.error(response.data.message)
+    toast.error(error.response?.data?.message || error.message)
   }
 }
 
@@ -78,11 +78,11 @@ const statusHandler = async (event,orderId)=>{
           <p><span className="font-medium">Date:</span> {new Date(order.date).toLocaleDateString()}</p>
           <p className="text-lg font-semibold text-green-600">{currency}{order.amount}</p>
           <select onChange={(event)=>statusHandler(event,order._id)} value={order.status} className="border rounded px-2 py-1 mt-2">
-            <option>Order Placed</option>
-            <option>Packing</option>
-            <option>Shipped</option>
-            <option>Out for delivery</option>
-            <option>Delivered</option>
+            <option value="Order Placed">Order Placed</option>
+            <option value="Packing">Packing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Out for delivery">Out for delivery</option>
+            <option value="Delivered">Delivered</option>
           </select>
         </div>
       </div>

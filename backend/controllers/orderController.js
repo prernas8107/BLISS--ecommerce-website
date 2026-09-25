@@ -8,12 +8,16 @@ import razorpay from 'razorpay'
 const currency = 'inr'
 const deliveryCharge = 10
 
-//gateway initialise 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-const razorpayInstance = new razorpay({
-    key_id : process.env.RAZORPAY_KEY_ID,
-    key_secret : process.env.RAZORPAY_KEY_SECRET,
-})
+//gateway initialise (skip when keys are missing so the API still starts)
+const stripe = process.env.STRIPE_SECRET_KEY
+    ? new Stripe(process.env.STRIPE_SECRET_KEY)
+    : null
+const razorpayInstance = (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET)
+    ? new razorpay({
+        key_id : process.env.RAZORPAY_KEY_ID,
+        key_secret : process.env.RAZORPAY_KEY_SECRET,
+    })
+    : null
 
 //Placing orders usig COD method
 const placeOrder = async (req, res) => {
@@ -44,6 +48,9 @@ const placeOrder = async (req, res) => {
 //Placing orders usig Stripe method
 const placeOrderStripe = async (req, res) => {
     try {
+        if (!stripe) {
+            return res.json({ success: false, message: 'Stripe is not configured' })
+        }
         const { userId, items, amount, address } = req.body
         const { origin } = req.headers;
 
@@ -114,6 +121,9 @@ const verifyStripe = async (req,res)=>{
 const placeOrderRazorpay = async (req, res) => {
 
     try {
+        if (!razorpayInstance) {
+            return res.json({ success: false, message: 'Razorpay is not configured' })
+        }
          const { userId, items, amount, address } = req.body
 
         const orderData = {
@@ -149,6 +159,9 @@ const placeOrderRazorpay = async (req, res) => {
 
 const verifyRazorpay = async(req,res)=>{
     try {
+        if (!razorpayInstance) {
+            return res.json({ success: false, message: 'Razorpay is not configured' })
+        }
         const {userId,razorpay_order_id}= req.body
         const orderInfo  = await razorpayInstance.orders.fetch(razorpay_order_id)
         if(orderInfo.status === 'paid'){

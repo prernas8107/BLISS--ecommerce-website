@@ -19,7 +19,7 @@ const List = ({ token }) => {
 
     } catch (error) {
       console.log(error)
-      toast.error(error.message)
+      toast.error(error.response?.data?.message || error.message)
     }
   }
 
@@ -34,7 +34,7 @@ const List = ({ token }) => {
       }
     } catch (error) {
       console.log(error)
-      toast.error(error.message)
+      toast.error(error.response?.data?.message || error.message)
     }
   }
   useEffect(() => {
@@ -55,25 +55,32 @@ const List = ({ token }) => {
         </div>
         {/* ------Product list------ */}
         {
-          list.map((item, index) => (
-            <div
-              key={index}
-              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 px-4 py-2 border-t border-gray-200 items-center"
-            >
-              <img
-                className="w-12 h-12 object-cover rounded"
-                src={item.image[0]}
-                alt={item.name}
-              />
-              <p>{item.name}</p>
-              <p className="hidden sm:block">{item.category}</p>
-              <p className="hidden md:block">{currency}{item.price}</p>
-              <p onClick={()=>removeProduct(item._id)} className="text-right md:text-center cursor-pointer text-lg text-red-500 hover:text-red-700">
-                X
-              </p>
+          list.length === 0 ? (
+            <div className="p-8 text-center text-gray-500">
+              <p className="text-base font-medium">No products found in the database.</p>
+              <p className="text-sm mt-1">Go to "Add Items" in the sidebar to add your first product.</p>
             </div>
+          ) : (
+            list.map((item, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 px-4 py-2 border-t border-gray-200 items-center"
+              >
+                <img
+                  className="w-12 h-12 object-cover rounded"
+                  src={item.image && item.image[0] ? item.image[0] : ""}
+                  alt={item.name}
+                />
+                <p>{item.name}</p>
+                <p className="hidden sm:block">{item.category}</p>
+                <p className="hidden md:block">{currency}{item.price}</p>
+                <p onClick={()=>removeProduct(item._id)} className="text-right md:text-center cursor-pointer text-lg text-red-500 hover:text-red-700">
+                  X
+                </p>
+              </div>
 
-          ))
+            ))
+          )
         }
 
       </div>

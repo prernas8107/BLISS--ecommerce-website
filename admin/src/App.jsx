@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Add from './pages/Add.jsx'
@@ -36,9 +36,11 @@ const App = () => {
   <Sidebar className="w-64" />   {/* Sidebar fixed width */}
  <div className="flex-1 ml-[220px] mt-[70px] my-8 text-gray-600 text-base">
   <Routes>
+    <Route path='/' element={<Navigate to="/add" replace />} />
     <Route path='/add' element={<Add token={token}/>} />
     <Route path='/list' element={<List token={token} />} />
     <Route path='/orders' element={<Orders token={token}/>} />
+    <Route path='*' element={<Navigate to="/add" replace />} />
   </Routes>
 </div>
 

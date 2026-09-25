@@ -49,6 +49,8 @@ if(response.data.success){
   setImage2(false)
   setImage3(false)
   setPrice('')
+  setSizes([])
+  setBestseller(false)
 }else{
       toast.error(response.data.message)
 

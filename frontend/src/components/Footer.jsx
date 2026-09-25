@@ -6,7 +6,7 @@ const Footer = () => {
         <div>
             <div className='grid grid-cols-1 sm:grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm'>
                 <div className=''>
-                    <img src={assets.blisslogo2} className='mb-0 w-50  ' alt="" srcset="" />
+                    <img src={assets.blisslogo2} className='mb-0 w-50' alt="" />
                     <p className='w-full md:w-2/3 text-gray-600'>
                         We are committed to delivering quality products, exceptional service, and timeless designs that bring comfort and style to everyday life.Driven by innovation and simplicity, we create collections that blend functionality with elegance, designed to make your lifestyle effortless.Our mission is to inspire confidence and joy through thoughtfully crafted products, backed by reliable support and a seamless shopping experience.                    </p>
                 </div>

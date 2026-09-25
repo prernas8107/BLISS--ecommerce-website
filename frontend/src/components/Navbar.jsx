@@ -38,11 +38,11 @@ const Navbar = () => {
 
             </ul>
             <div className='flex items-center gap-6'>
-                <img onClick={()=>setShowSearch(true)} src={assets.search2} className='w-7 cursor-pointer' alt="" srcset="" />
+                <img onClick={()=>setShowSearch(true)} src={assets.search2} className='w-7 cursor-pointer' alt="" />
                 <div className='group relative'>
 
                   
-                    <img onClick={()=>token? null : navigate('/login')} src={assets.account} className='w-7 cursor-pointer' alt="" srcset="" />
+                    <img onClick={()=>token? null : navigate('/login')} src={assets.account} className='w-7 cursor-pointer' alt="" />
                     {/* Drop down menu */}
                     {
                         token && 
@@ -57,7 +57,7 @@ const Navbar = () => {
                     
                 </div>
                 <Link to="/cart" className='relative'>
-                    <img src={assets.cart3} className='w-7 min-w-7' alt="" srcset="" />
+                    <img src={assets.cart3} className='w-7 min-w-7' alt="" />
                     <p className="absolute -right-1 -bottom-1 flex items-center justify-center w-4 h-4 bg-black text-white rounded-full text-[8px]"> {getCartCount()}</p>
                 </Link>
                 <img onClick={() => setVisible(true)} src={assets.menu} className="w-7 cursor-pointer sm:hidden" alt="" />
@@ -69,7 +69,7 @@ const Navbar = () => {
             <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? "w-full" : "w-0"} `}>
                 <div className='flex flex-col text-gray-600'>
                     <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>
-                        <img className='h-4 rotate-180' src={assets.dropdown} alt="" srcset="" />
+                        <img className='h-4 rotate-180' src={assets.dropdown} alt="" />
                         <p>Back</p>
                     </div>
                     <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/">HOME</NavLink>

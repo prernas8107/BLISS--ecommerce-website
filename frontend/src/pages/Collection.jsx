@@ -32,44 +32,37 @@ const toggleSubCategory=(e)=>{
 }
 
 
-const applyFilter =()=>{
-  let productsCopy  = products.slice();
+const applyFilter = () => {
+  let productsCopy = products.slice();
 
-  if(showSearch && search){
-    productsCopy= productsCopy.filter(item=> item.name.toLowerCase().includes(search.toLowerCase()))
+  if (showSearch && search) {
+    productsCopy = productsCopy.filter(item => item.name?.toLowerCase().includes(search.toLowerCase()))
   }
 
-  if (category.length>0){
-    productsCopy= productsCopy.filter(item => category.includes(item.category))
+  if (category.length > 0) {
+    productsCopy = productsCopy.filter(item => category.includes(item.category))
   }
-  if (subCategory.length>0){
-    productsCopy= productsCopy.filter(item => subCategory.includes(item.subCategory))
+  if (subCategory.length > 0) {
+    productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory))
   }
+
+  switch (sortType) {
+    case 'low-high':
+      productsCopy.sort((a, b) => a.price - b.price);
+      break;
+    case 'high-low':
+      productsCopy.sort((a, b) => b.price - a.price);
+      break;
+    default:
+      break;
+  }
+
   setFilterProducts(productsCopy)
 }
 
-  const sortProduct =()=>{
-    let fpCopy = filterProducts.slice();
-    switch(sortType){
-      case 'low-high':
-        setFilterProducts(fpCopy.sort((a,b)=>(a.price - b.price)));
-        break;
-         case 'high-low':
-        setFilterProducts(fpCopy.sort((a,b)=>(b.price - a.price)));
-        break;
-        default:
-          applyFilter();
-          break;
-    }
-  }
-  // jab bi  category ya subcategorty update hoga applyfilter execute hoga
-useEffect(()=>{
-   applyFilter();       
-},[category,subCategory,search,showSearch,products])
-
-useEffect(()=>{
-sortProduct();
-},[sortType])
+useEffect(() => {
+  applyFilter();
+}, [category, subCategory, search, showSearch, products, sortType])
                                                    // applyfilter()  is for category,subcategory  & sortProduct is for sortType search me bi kamm aajaega
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t '>
@@ -134,7 +127,7 @@ sortProduct();
         </select></div>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
           {
-            filterProducts.map((item, index) => (
+            filterProducts.map((item) => (
               <ProductItem
                 key={item._id}
                 name={item.name}
