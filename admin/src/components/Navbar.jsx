@@ -11,10 +11,21 @@ const Navbar = ({setToken}) => {
         alt="Bliss Logo"
       />
 
-      {/* Logout Button */}
-      <button onClick={()=>setToken('')} className="bg-gray-700 hover:bg-gray-800 transition-colors text-white px-6 py-2 sm:px-8 sm:py-2 rounded-full text-sm font-medium">
-        Logout
-      </button>
+      <div className="flex items-center gap-3">
+        {/* Continue as User Link */}
+        <a
+          href={`${import.meta.env.VITE_FRONTEND_URL || 'http://localhost:5173'}/login`}
+          className="text-xs sm:text-sm text-gray-700 hover:text-black border border-gray-300 hover:border-gray-500 px-4 py-2 rounded-full font-medium transition-colors hidden sm:inline-flex items-center gap-1.5"
+        >
+          <span>Continue as User</span>
+          <span>→</span>
+        </a>
+
+        {/* Logout Button */}
+        <button onClick={()=>setToken('')} className="bg-gray-700 hover:bg-gray-800 transition-colors text-white px-6 py-2 sm:px-8 sm:py-2 rounded-full text-sm font-medium">
+          Logout
+        </button>
+      </div>
     </div>
   )
 }
