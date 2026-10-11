@@ -52,7 +52,7 @@ const placeOrderStripe = async (req, res) => {
             return res.json({ success: false, message: 'Stripe is not configured' })
         }
         const { userId, items, amount, address } = req.body
-        const { origin } = req.headers;
+        const origin = req.headers.origin || process.env.FRONTEND_URL || "http://localhost:5173";
 
         const orderData = {
             userId,
