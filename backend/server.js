@@ -31,6 +31,7 @@ app.use(express.json());
 app.use(cors());
 
 // Serve static images for local development and seeded products
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use("/images", express.static(path.join(__dirname, "../frontend/src/assets")));
 
 // Health & Database readiness guard
