@@ -5,6 +5,21 @@
 *{
 font-family: 'Outfit', sans-serif;}
 
+/* Cross-browser and iOS device optimizations */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Prevent auto-zooming on focus in iOS Safari */
+@media (max-width: 640px) {
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
 .select,input,textarea{
     border: 1px solid #c2c2c2;
     outline-color: #C586A5;

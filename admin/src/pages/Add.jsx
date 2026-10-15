@@ -62,26 +62,26 @@ if(response.data.success){
 }
 
   return (
-    <form onSubmit={onSubmitHandler} className=" mt-15 md:ml-[220px] p-6 bg-white shadow-md rounded-lg border border-gray-300 max-w-3xl mx-auto space-y-6">
+    <form onSubmit={onSubmitHandler} className="w-full max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white shadow-sm rounded-lg border border-gray-200 space-y-5 sm:space-y-6">
       {/* Upload Section */}
-      <p className="text-lg font-semibold text-gray-700 text-center">Upload Image</p>
-      <div className="flex flex-wrap justify-center gap-6">
-        <label htmlFor="image1" className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-pink-400 transition">
-          <img className="w-12 h-12 opacity-70" src={!image1 ? assets.upload : URL.createObjectURL(image1)} alt="Upload" />
-          <span className="mt-2 text-sm text-gray-500">Image 1</span>
+      <p className="text-base sm:text-lg font-semibold text-gray-700 text-center">Upload Image</p>
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
+        <label htmlFor="image1" className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-pink-400 transition p-2">
+          <img className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 opacity-70 object-contain" src={!image1 ? assets.upload : URL.createObjectURL(image1)} alt="Upload" />
+          <span className="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-500">Image 1</span>
           <input onChange={(e)=>setImage1(e.target.files[0])} type='file' id='image1' hidden/>
         </label>
 
-        <label htmlFor="image2" className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-pink-400 transition">
-          <img className="w-12 h-12 opacity-70" src={!image2 ? assets.upload : URL.createObjectURL(image2)} alt="Upload" />
-          <span className="mt-2 text-sm text-gray-500">Image 2</span>
-                <input onChange={(e)=>setImage2(e.target.files[0])} type='file' id='image2'hidden/>
+        <label htmlFor="image2" className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-pink-400 transition p-2">
+          <img className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 opacity-70 object-contain" src={!image2 ? assets.upload : URL.createObjectURL(image2)} alt="Upload" />
+          <span className="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-500">Image 2</span>
+          <input onChange={(e)=>setImage2(e.target.files[0])} type='file' id='image2' hidden/>
         </label>
 
-        <label htmlFor="image3" className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-pink-400 transition">
-          <img className="w-12 h-12 opacity-70" src={!image3 ? assets.upload : URL.createObjectURL(image3)} alt="Upload" />
-          <span className="mt-2 text-sm text-gray-500">Image 3</span>
-         <input onChange={(e)=>setImage3(e.target.files[0])} type='file' id='image3'hidden/>
+        <label htmlFor="image3" className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-pink-400 transition p-2">
+          <img className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 opacity-70 object-contain" src={!image3 ? assets.upload : URL.createObjectURL(image3)} alt="Upload" />
+          <span className="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-500">Image 3</span>
+          <input onChange={(e)=>setImage3(e.target.files[0])} type='file' id='image3' hidden/>
         </label>
       </div>
 

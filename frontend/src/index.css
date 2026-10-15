@@ -15,12 +15,29 @@ font-family: 'Outfit', sans-serif;
   font-style: normal;
 }
 
-/* //scrollbar in product page; */
-::-webkit-scrollbar{
+/* Cross-browser and iOS device optimizations */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Prevent auto-zooming on focus in iOS Safari */
+@media (max-width: 640px) {
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Scrollbar hiding utilities */
+::-webkit-scrollbar {
     display: none;
 }
-;
-
+* {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 
 @media(max-width:640px){
     a.active{

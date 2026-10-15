@@ -28,47 +28,57 @@ const Product = () => {
   return productData ? (
     <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100'>
       {/*--------- product data---------- */}
-      <div className='flex gap-12 sm:gap-12 flex-col sm:flex-row'>
-        {/*------------- product iamge---------- */}
+      <div className='flex gap-6 sm:gap-12 flex-col sm:flex-row'>
+        {/*------------- product image---------- */}
         <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
-          <div className='flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full'>
-        {
-          (Array.isArray(productData.image) ? productData.image : []).map((item,index)=>(
-            <img onClick={()=>setImage(item)} src={item} key={index} className='w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer' alt="" />
-          ))
-        }
+          <div className='flex sm:flex-col overflow-x-auto gap-2 sm:gap-3 sm:w-[20%] w-full'>
+            {
+              (Array.isArray(productData.image) ? productData.image : []).map((item,index)=>(
+                <img 
+                  onClick={()=>setImage(item)} 
+                  src={item} 
+                  key={index} 
+                  className={`w-16 sm:w-full aspect-square object-cover flex-shrink-0 cursor-pointer rounded border ${item === image ? 'border-black' : 'border-gray-200'}`} 
+                  alt="" 
+                />
+              ))
+            }
           </div>
           <div className='w-full sm:w-[80%]'>
-            <img className='w-full h-auto ' src={image} alt="" />
-
+            <img className='w-full h-auto max-h-[520px] object-contain sm:object-cover rounded' src={image} alt="" />
           </div>
         </div>
         {/* --------prod info-------- */}
         <div className='flex-1'>
-          <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
+          <h1 className='font-medium text-xl sm:text-2xl mt-2'>{productData.name}</h1>
           <div className='flex items-center gap-1 mt-2'>
             <img src={assets.star} alt="" className="w-3" />
             <img src={assets.star} alt="" className="w-3" />
             <img src={assets.star} alt="" className="w-3" />
             <img src={assets.star} alt="" className="w-3" />
             <img src={assets.dullstar} alt="" className="w-2.5" />
-            <p className='pl-2'>(122)</p>
-
+            <p className='pl-2 text-xs sm:text-sm text-gray-500'>(122)</p>
           </div>
-          <p className='mt-5 text-3xl font-medium'>{currency}{productData.price}</p>
-        <p className='mt-5 text-gray-500 md:w-4/5'>{productData.description}</p>
-        <div className='flex flex-col gap-4 my-8'>
-          <p>Select Size </p>
-          <div className='flex gap-2'>
-          {
-            (Array.isArray(productData.sizes) ? productData.sizes : []).map((item,index)=>(
-              <button onClick={()=>setSize(item)} className={` border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-50': ''}`} key={index}>{item}</button>
-            ))
-          }
+          <p className='mt-4 sm:mt-5 text-2xl sm:text-3xl font-medium'>{currency}{productData.price}</p>
+          <p className='mt-4 sm:mt-5 text-gray-500 md:w-4/5 text-sm sm:text-base leading-relaxed'>{productData.description}</p>
+          <div className='flex flex-col gap-3 my-6 sm:my-8'>
+            <p className='text-sm font-medium'>Select Size </p>
+            <div className='flex flex-wrap gap-2'>
+            {
+              (Array.isArray(productData.sizes) ? productData.sizes : []).map((item,index)=>(
+                <button 
+                  onClick={()=>setSize(item)} 
+                  className={`border py-2 px-4 rounded text-sm cursor-pointer transition ${item === size ? 'border-black bg-black text-white': 'border-gray-300 bg-gray-100 text-gray-800'}`} 
+                  key={index}
+                >
+                  {item}
+                </button>
+              ))
+            }
+            </div>
           </div>
-        </div>
-          <button onClick={()=>addToCart(productData._id,size)}   className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700' >ADD TO CART</button>
-          <hr  className='mt-8 sm:w-4/5'/>
+          <button onClick={()=>addToCart(productData._id,size)} className='bg-black text-white px-8 py-3.5 text-sm font-medium active:bg-gray-700 w-full sm:w-auto rounded-sm cursor-pointer' >ADD TO CART</button>
+          <hr className='mt-8 sm:w-4/5'/>
           <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>
             <p> 100% Original Product.</p>
             <p> Cash on delivery is available on this product.</p>

@@ -57,23 +57,23 @@ const Login = () => {
   },[token])
 
   return (
-    <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800'>
-      <div className='inline-flex items-center gap-2 mb-2 mt-10'>
-        <p className='prata-regular text-3xl'>{currentState}</p>
+    <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-full max-w-[380px] px-4 sm:px-0 m-auto mt-10 sm:mt-14 gap-4 text-gray-800'>
+      <div className='inline-flex items-center gap-2 mb-2 mt-6 sm:mt-10'>
+        <p className='prata-regular text-2xl sm:text-3xl'>{currentState}</p>
         <hr className='border-none h-[1.5px] w-8 bg-gray-800' />
       </div>
-      {currentState === 'Login' ? '' : <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='w-full px-3 border border-gray-800' placeholder='Name' />}
-      <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className='w-full px-3 border border-gray-800' placeholder='Email' />
-      <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" className='w-full px-3 border border-gray-800' placeholder='Password' />
-      <div className='w-full  flex justify-between text-sm mt-[-8px]'>
-        <p className='cursor-pointer'>Forgot your Password</p>
+      {currentState === 'Login' ? '' : <input required onChange={(e) => setName(e.target.value)} value={name} type="text" className='w-full px-3.5 py-2.5 border border-gray-400 rounded-sm text-base sm:text-sm outline-none focus:border-black' placeholder='Name' />}
+      <input required onChange={(e) => setEmail(e.target.value)} value={email} type="email" className='w-full px-3.5 py-2.5 border border-gray-400 rounded-sm text-base sm:text-sm outline-none focus:border-black' placeholder='Email' />
+      <input required onChange={(e) => setPassword(e.target.value)} value={password} type="password" className='w-full px-3.5 py-2.5 border border-gray-400 rounded-sm text-base sm:text-sm outline-none focus:border-black' placeholder='Password' />
+      <div className='w-full flex justify-between text-xs sm:text-sm mt-[-4px] text-gray-600'>
+        <p className='cursor-pointer hover:text-black'>Forgot your password?</p>
         {
           currentState === 'Login'
-            ? <p onClick={() => setCurrentState('Sign Up')} className='cursor-pointer'>Create account</p>
-            : <p onClick={() => setCurrentState('Login')} className='cursor-pointer'>Login Here</p>
+            ? <p onClick={() => setCurrentState('Sign Up')} className='cursor-pointer hover:text-black font-medium text-black'>Create account</p>
+            : <p onClick={() => setCurrentState('Login')} className='cursor-pointer hover:text-black font-medium text-black'>Login Here</p>
         }
       </div>
-      <button className='bg-black text-white font-light px-8 py-2 mt-4'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
+      <button type='submit' className='bg-black text-white font-medium px-8 py-2.5 mt-2 w-full sm:w-auto rounded-sm active:scale-95 transition cursor-pointer text-sm'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
     </form>
   )
 }

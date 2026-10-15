@@ -46,12 +46,12 @@ const List = ({ token }) => {
 
       <div className="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200">
         {/* Header row */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 px-4 py-2 font-semibold text-gray-600 bg-gray-100">
-          <span>Image</span>
+        <div className="grid grid-cols-[auto_1fr_auto] sm:grid-cols-[auto_2fr_1fr_auto] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] gap-3 sm:gap-4 px-3 sm:px-4 py-2.5 font-semibold text-xs sm:text-sm text-gray-600 bg-gray-100 items-center">
+          <span className="w-12 text-center">Image</span>
           <span>Name</span>
           <span className="hidden sm:block">Category</span>
           <span className="hidden md:block">Price</span>
-          <span className="hidden md:block text-center">Action</span>
+          <span className="text-center w-10">Action</span>
         </div>
         {/* ------Product list------ */}
         {
@@ -64,21 +64,25 @@ const List = ({ token }) => {
             list.map((item, index) => (
               <div
                 key={index}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 px-4 py-2 border-t border-gray-200 items-center"
+                className="grid grid-cols-[auto_1fr_auto] sm:grid-cols-[auto_2fr_1fr_auto] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] gap-3 sm:gap-4 px-3 sm:px-4 py-2.5 border-t border-gray-200 items-center text-xs sm:text-sm"
               >
                 <img
-                  className="w-12 h-12 object-cover rounded"
+                  className="w-12 h-12 object-cover rounded shrink-0 bg-gray-50"
                   src={item.image && item.image[0] ? item.image[0] : ""}
                   alt={item.name}
                 />
-                <p>{item.name}</p>
-                <p className="hidden sm:block">{item.category}</p>
-                <p className="hidden md:block">{currency}{item.price}</p>
-                <p onClick={()=>removeProduct(item._id)} className="text-right md:text-center cursor-pointer text-lg text-red-500 hover:text-red-700">
-                  X
-                </p>
+                <div className="min-w-0">
+                  <p className="truncate sm:whitespace-normal font-medium text-gray-800">{item.name}</p>
+                  <p className="text-xs text-gray-500 md:hidden mt-0.5">{currency}{item.price}</p>
+                </div>
+                <p className="hidden sm:block text-gray-600">{item.category}</p>
+                <p className="hidden md:block font-medium">{currency}{item.price}</p>
+                <div className="text-center w-10">
+                  <span onClick={()=>removeProduct(item._id)} className="cursor-pointer text-base sm:text-lg font-bold text-red-500 hover:text-red-700 p-2 inline-block">
+                    ✕
+                  </span>
+                </div>
               </div>
-
             ))
           )
         }
